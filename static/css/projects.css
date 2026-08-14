@@ -146,8 +146,7 @@
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: var(--space-8);
-  gap: var(--space-4);
+  padding: 0;
   transition: border-color var(--transition), transform var(--transition),
               box-shadow var(--transition);
   position: relative;
@@ -157,14 +156,15 @@
 .project-card--embed::before {
   content: '';
   position: absolute;
-  top: var(--space-5);
-  right: var(--space-5);
+  top: var(--space-4);
+  right: var(--space-4);
   width: 10px;
   height: 10px;
   border: 1.5px solid var(--garnet);
   border-radius: var(--radius-sm);
   transition: background var(--transition);
   z-index: 10;
+  pointer-events: none;
 }
 
 .project-card--embed:hover {
@@ -177,31 +177,32 @@
   background: var(--garnet);
 }
 
-.project-embed-meta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-2);
-}
-
-.project-embed-title-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
+/* TOP SECTION: Light interactive canvas embed */
+.project-embed-top {
+  position: relative;
+  background: #eef2f6;
+  background-image: 
+    radial-gradient(#cbd5e1 1px, transparent 1px),
+    radial-gradient(#cbd5e1 1px, #eef2f6 1px);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--border);
 }
 
 /* Viewport / Frame */
 .project-embed-viewport {
   position: relative;
   width: 100%;
-  height: 330px;
-  background: #0c0e12;
-  border: 1px solid var(--border);
+  height: 290px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: var(--radius-md);
   overflow: hidden;
   cursor: grab;
   user-select: none;
   touch-action: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
 }
 
 .project-embed-viewport:active {
@@ -210,7 +211,8 @@
 
 .project-embed-viewport.is-interactive {
   cursor: default;
-  border-color: var(--garnet-bright);
+  border-color: var(--garnet);
+  box-shadow: 0 0 0 2px rgba(178, 58, 74, 0.3);
 }
 
 .project-embed-canvas {
@@ -226,7 +228,7 @@
   border: none;
   pointer-events: none;
   display: block;
-  background: #14171C;
+  background: #ffffff;
 }
 
 .project-embed-viewport.is-interactive .project-embed-iframe {
@@ -239,26 +241,24 @@
   top: var(--space-3);
   left: var(--space-3);
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: 0.6rem;
   letter-spacing: 0.04em;
-  color: var(--text-muted);
-  background: rgba(20, 23, 28, 0.85);
+  color: #475569;
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  border: 1px solid var(--border);
+  border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: var(--radius-sm);
   padding: 3px 8px;
   pointer-events: none;
   transition: opacity var(--transition), color var(--transition), border-color var(--transition);
   z-index: 5;
-}
-
-.project-embed-viewport:hover .project-embed-hint {
-  opacity: 0.95;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .project-embed-viewport.is-interactive .project-embed-hint {
   color: var(--garnet-bright);
+  background: rgba(20, 23, 28, 0.92);
   border-color: var(--garnet);
 }
 
@@ -269,14 +269,15 @@
   right: var(--space-3);
   display: flex;
   align-items: center;
-  gap: 2px;
-  background: rgba(20, 23, 28, 0.9);
+  gap: 3px;
+  background: rgba(20, 23, 28, 0.92);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid var(--border);
   border-radius: var(--radius-pill);
   padding: 3px 6px;
   z-index: 5;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
 }
 
 .project-embed-readout {
@@ -287,6 +288,7 @@
   color: var(--garnet-bright);
   padding: 0 6px;
   user-select: none;
+  font-weight: 500;
 }
 
 .project-embed-btn {
@@ -314,6 +316,78 @@
   border-color: var(--garnet-bright);
 }
 
+/* BOTTOM SECTION: Dark content panel */
+.project-embed-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-6) var(--space-8) var(--space-8);
+  background: var(--surface);
+}
+
+.project-embed-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--garnet-bright);
+  font-weight: 500;
+}
+
+.project-embed-title {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.25;
+}
+
+.project-embed-desc {
+  color: var(--text-dim);
+  font-size: 0.93rem;
+  line-height: 1.7;
+}
+
+.project-embed-techline {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  margin-top: var(--space-1);
+}
+
+.project-embed-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border);
+  margin-top: var(--space-2);
+}
+
+.project-embed-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--garnet-bright);
+  font-weight: 600;
+  transition: gap var(--transition), color var(--transition);
+}
+
+.project-embed-cta:hover {
+  gap: var(--space-3);
+  color: var(--text);
+}
+
+.project-embed-cta svg {
+  width: 14px;
+  height: 14px;
+}
+
 /* ==============================
    RESPONSIVE
    ============================== */
@@ -323,7 +397,12 @@
   }
   
   .project-embed-viewport {
-    height: 300px;
+    height: 260px;
+  }
+
+  .project-embed-bottom {
+    padding: var(--space-5) var(--space-6) var(--space-6);
   }
 }
+
 

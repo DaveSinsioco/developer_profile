@@ -59,61 +59,64 @@
 
       <!-- Card 2: Interactive Live Preview Embed -->
       <article class="project-card--embed" id="project-datamanagement" aria-label="Data Management project embed">
-        <div class="project-embed-meta">
-          <div class="project-embed-title-wrap">
-            <span class="project-category">Full Stack · Live Preview</span>
-            <h3 class="project-title">Data Management System</h3>
-          </div>
-          <div class="project-pills" aria-label="Tech stack">
-            <span class="pill">Next.js / Web</span>
-            <span class="pill">Interactive</span>
-          </div>
-        </div>
+        
+        <!-- TOP SECTION: Live Embed Area (Light Canvas) -->
+        <div class="project-embed-top">
+          <div class="project-embed-viewport" id="embed-viewport" tabindex="0" title="Drag to pan, scroll to zoom, double-click to interact">
+            <span class="project-embed-hint" id="embed-hint">🖱 Drag to pan · Ctrl+Scroll to zoom · Double-click to interact</span>
 
-        <!-- Panzoom Interactive Viewport -->
-        <div class="project-embed-viewport" id="embed-viewport" tabindex="0" title="Drag to pan, scroll to zoom, double-click to interact">
-          <span class="project-embed-hint" id="embed-hint">🖱 Drag to pan · Scroll to zoom · Double-click to interact</span>
+            <div class="project-embed-canvas" id="embed-canvas">
+              <iframe
+                src="https://vxetia2-data-management.vercel.app/"
+                class="project-embed-iframe"
+                id="embed-iframe"
+                title="Data Management Live Preview"
+                loading="lazy"
+              ></iframe>
+            </div>
 
-          <div class="project-embed-canvas" id="embed-canvas">
-            <iframe
-              src="https://vxetia2-data-management.vercel.app/"
-              class="project-embed-iframe"
-              id="embed-iframe"
-              title="Data Management Live Preview"
-              loading="lazy"
-            ></iframe>
-          </div>
-
-          <!-- Controls: Zoom Readout & Buttons -->
-          <div class="project-embed-controls" aria-label="Embed zoom controls">
-            <span class="project-embed-readout" id="embed-zoom-readout">1:2.8</span>
-            <button type="button" class="project-embed-btn" id="embed-zoom-out" title="Zoom Out" aria-label="Zoom Out">−</button>
-            <button type="button" class="project-embed-btn" id="embed-zoom-fit" title="Fit to Viewport" aria-label="Fit to Viewport">Fit</button>
-            <button type="button" class="project-embed-btn" id="embed-zoom-in" title="Zoom In" aria-label="Zoom In">+</button>
-            <button type="button" class="project-embed-btn project-embed-btn--toggle" id="embed-toggle-interact" title="Toggle Live Interaction" aria-label="Toggle Live Interaction">Interact</button>
+            <!-- Controls: Zoom Readout & Buttons positioned in bottom-right corner of embed area -->
+            <div class="project-embed-controls" aria-label="Embed zoom controls">
+              <span class="project-embed-readout" id="embed-zoom-readout">M 1:2.8</span>
+              <button type="button" class="project-embed-btn" id="embed-zoom-out" title="Zoom Out" aria-label="Zoom Out">−</button>
+              <button type="button" class="project-embed-btn" id="embed-zoom-fit" title="Fit to Viewport" aria-label="Fit to Viewport">Fit</button>
+              <button type="button" class="project-embed-btn" id="embed-zoom-in" title="Zoom In" aria-label="Zoom In">+</button>
+              <button type="button" class="project-embed-btn project-embed-btn--toggle" id="embed-toggle-interact" title="Toggle Live Interaction" aria-label="Toggle Live Interaction">Interact</button>
+            </div>
           </div>
         </div>
 
-        <div class="project-card-footer">
-          <a
-            href="https://vxetia2-data-management.vercel.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="project-link"
-            id="project-datamanagement-link"
-            aria-label="Open Data Management site in new tab"
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-              <polyline points="15 3 21 3 21 9"></polyline>
-              <line x1="10" y1="14" x2="21" y2="3"></line>
-            </svg>
-            View Live Site →
-          </a>
-          <span class="pill" style="border-color: var(--garnet); color: var(--garnet-bright);">
-            ● Live Preview
-          </span>
+        <!-- BOTTOM SECTION: Dark Info Panel -->
+        <div class="project-embed-bottom">
+          <span class="project-embed-eyebrow">Data Management System</span>
+          <h3 class="project-embed-title">Data Management &amp; Analytics Platform</h3>
+          <p class="project-embed-desc">
+            A full-stack data management platform featuring real-time data visualizers, table filtering, 
+            and system diagnostics. Built to explore responsive frontend architectures and seamless 
+            dashboard interactivity.
+          </p>
+          <p class="project-embed-techline">Next.js / TypeScript / Tailwind CSS / Vercel</p>
+
+          <div class="project-embed-footer">
+            <a
+              href="https://vxetia2-data-management.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="project-embed-cta"
+              id="project-datamanagement-link"
+              aria-label="Explore Data Management site in new tab"
+            >
+              Explore System
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
+            <span class="pill" style="border-color: var(--garnet); color: var(--garnet-bright);">
+              ● Live Embed
+            </span>
+          </div>
         </div>
+
       </article>
 
     </div><!-- /projects-grid -->
@@ -137,15 +140,15 @@
 
       // Calculate initial fit scale for a 1200px canvas inside the viewport
       function getFitScale() {
-        const vw = viewport.clientWidth || 400;
-        return Math.max(0.28, Math.min(0.5, vw / 1200));
+        const vw = viewport.clientWidth || 380;
+        return Math.max(0.25, Math.min(0.45, vw / 1200));
       }
 
       const initialScale = getFitScale();
 
       const panzoom = Panzoom(canvas, {
         maxScale: 3.0,
-        minScale: 0.25,
+        minScale: 0.22,
         step: 0.15,
         startScale: initialScale,
         startX: 0,
@@ -156,18 +159,20 @@
 
       function updateReadout(scale) {
         if (!scale) scale = panzoom.getScale();
-        // format as ratio like 1:1.6 or (1/scale)
         const ratio = (1 / scale).toFixed(1);
-        readout.textContent = `1:${ratio}`;
+        readout.textContent = `M 1:${ratio}`;
       }
 
       updateReadout(initialScale);
 
-      // Scroll-to-zoom on the viewport container
+      // Scroll-to-zoom: ONLY intercept when Ctrl/Meta is pressed or when interacting,
+      // so normal page scrolling is never blocked!
       viewport.addEventListener('wheel', function (e) {
         if (viewport.classList.contains('is-interactive')) return;
-        e.preventDefault();
-        panzoom.zoomWithWheel(e);
+        if (e.ctrlKey || e.metaKey) {
+          e.preventDefault();
+          panzoom.zoomWithWheel(e);
+        }
       }, { passive: false });
 
       // Listen to panzoom change events to keep readout updated
@@ -207,7 +212,7 @@
           viewport.classList.remove('is-interactive');
           btnToggle.classList.remove('is-active');
           btnToggle.textContent = 'Interact';
-          hint.textContent = '🖱 Drag to pan · Scroll to zoom · Double-click to interact';
+          hint.textContent = '🖱 Drag to pan · Ctrl+Scroll to zoom · Double-click to interact';
         }
       }
 
