@@ -1,4 +1,5 @@
 {
+  "alias": ["vxetia2.vercel.app"],
   "builds": [
     { "src": "app.py", "use": "@vercel/python" }
   ],
