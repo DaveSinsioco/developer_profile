@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dave Michael Sinsioco — Developer Portfolio</title>
+  <meta name="description" content="Computer engineering student at PUP Sta. Mesa specializing in data structures, algorithms, and operating systems. Based in Bulacan, Philippines.">
+  <meta name="author" content="Dave Michael Sinsioco">
+  <meta property="og:title" content="Dave Michael Sinsioco — Developer">
+  <meta property="og:description" content="Computer engineering student building a solid foundation in DSA and OS, with a habit of sketching between compiles.">
+  <meta property="og:type" content="website">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/hero.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/projects.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/skills.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/education.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/experience.css') }}">
+</head>
+<body>
+
+  <!-- ====== NAV ====== -->
+  <nav class="nav" aria-label="Primary navigation">
+    <div class="container">
+      <span class="nav-brand">dave<span>.</span>sinsioco</span>
+      <ul class="nav-links" role="list">
+        <li><a href="#projects" id="nav-projects"><span class="nav-mark">#</span>projects</a></li>
+        <li><a href="#skills"   id="nav-skills"><span class="nav-mark">#</span>skills</a></li>
+        <li><a href="#education" id="nav-education"><span class="nav-mark">#</span>education</a></li>
+        <li><a href="#experience" id="nav-experience"><span class="nav-mark">#</span>experience</a></li>
+        <li><a href="#contact"  id="nav-contact"><span class="nav-mark">#</span>contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ====== SECTIONS ====== -->
+  {% include 'hero.html' %}
+  {% include 'about.html' %}
+  {% include 'projects.html' %}
+  {% include 'skills.html' %}
+  {% include 'education.html' %}
+  {% include 'experience.html' %}
+
+  <!-- ====== FOOTER / CONTACT ====== -->
+  <footer id="contact" class="footer" aria-label="Contact">
+    <div class="container">
+
+      <!-- Linked-list divider -->
+      <div class="ll-divider" aria-hidden="true">
+        <span class="ll-line"></span>
+        <span class="ll-arrow">→</span>
+        <span class="ll-line"></span>
+      </div>
+
+      <p class="section-label">Contact</p>
+      <h2 class="footer-heading">Let's connect.</h2>
+      <p class="footer-sub">Feel free to reach out for collaborations, questions, or just to say hi.</p>
+
+      <div class="contact-grid" role="list">
+
+        <!-- Email -->
+        <a href="mailto:sinciocodave@gmail.com" class="contact-tile" id="contact-email" role="listitem" aria-label="Email: sinciocodave@gmail.com">
+          <svg class="contact-tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+          </svg>
+          <span class="contact-tile-label">Email</span>
+          <span class="contact-tile-value">sinciocodave@gmail.com</span>
+        </a>
+
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/in/dave-sinsioco-a716b436b/" target="_blank" rel="noopener noreferrer" class="contact-tile" id="contact-linkedin" role="listitem" aria-label="LinkedIn: dave-sinsioco">
+          <svg class="contact-tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="2" width="20" height="20" rx="4"/>
+            <path d="M7 10v7M7 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/>
+          </svg>
+          <span class="contact-tile-label">LinkedIn</span>
+          <span class="contact-tile-value">dave-sinsioco</span>
+        </a>
+
+        <!-- GitHub -->
+        <a href="https://github.com/DaveSinsioco" target="_blank" rel="noopener noreferrer" class="contact-tile" id="contact-github" role="listitem" aria-label="GitHub: DaveSinsioco">
+          <svg class="contact-tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+          </svg>
+          <span class="contact-tile-label">GitHub</span>
+          <span class="contact-tile-value">DaveSinsioco</span>
+        </a>
+
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/kurohakeiceroz/" target="_blank" rel="noopener noreferrer" class="contact-tile" id="contact-instagram" role="listitem" aria-label="Instagram: @kurohakeiceroz">
+          <svg class="contact-tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="2" width="20" height="20" rx="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
+          </svg>
+          <span class="contact-tile-label">Instagram</span>
+          <span class="contact-tile-value">@kurohakeiceroz</span>
+        </a>
+
+        <!-- Discord -->
+        <div class="contact-tile" id="contact-discord" role="listitem" aria-label="Discord: kurohakei">
+          <svg class="contact-tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
+          </svg>
+          <span class="contact-tile-label">Discord</span>
+          <span class="contact-tile-value">kurohakei</span>
+        </div>
+
+      </div><!-- /contact-grid -->
+
+      <p class="footer-copy">
+        © 2025 Dave Michael Sinsioco · Built with Flask & Jinja2 · Deployed on Vercel
+      </p>
+
+    </div>
+  </footer>
+
+</body>
+</html>

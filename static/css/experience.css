@@ -1,0 +1,59 @@
+/* =========================================
+   experience.css — Experience section
+   ========================================= */
+
+.experience {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+}
+
+/* Reuses .timeline and .timeline-* classes from education.css */
+
+/* Empty state card */
+.experience-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  background: var(--surface-alt);
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-10) var(--space-8);
+  max-width: 580px;
+  transition: border-color var(--transition);
+}
+
+.experience-empty:hover {
+  border-color: var(--garnet);
+}
+
+.experience-empty-icon {
+  width: 40px;
+  height: 40px;
+  color: var(--garnet);
+  opacity: 0.7;
+}
+
+.experience-empty-heading {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.experience-empty-body {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  max-width: 48ch;
+}
+
+.experience-empty-note {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--garnet-bright);
+  border: 1px dashed var(--garnet);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+  background: var(--garnet-bg);
+}

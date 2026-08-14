@@ -1,0 +1,111 @@
+/* =========================================
+   skills.css — Skills section
+   ========================================= */
+
+.skills {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+/* Column card */
+.skill-col {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-6) var(--space-6) var(--space-8);
+  position: relative;
+  transition: border-color var(--transition);
+}
+
+/* Corner marker: linked-list node */
+.skill-col::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: var(--space-5);
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid var(--garnet);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+}
+
+.skill-col:hover {
+  border-color: var(--garnet);
+}
+
+.skill-col-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--garnet-bright);
+  margin-bottom: var(--space-5);
+  padding-top: var(--space-2);
+}
+
+.skill-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.skill-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  transition: color var(--transition);
+}
+
+.skill-item::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--garnet);
+  flex-shrink: 0;
+  transition: transform var(--transition);
+}
+
+.skill-col:hover .skill-item {
+  color: var(--text);
+}
+
+.skill-col:hover .skill-item::before {
+  transform: scale(1.4);
+}
+
+.skill-placeholder-note {
+  display: block;
+  margin-top: var(--space-5);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  border-top: 1px dashed var(--border);
+  padding-top: var(--space-4);
+}
+
+/* ==============================
+   RESPONSIVE
+   ============================== */
+@media (max-width: 900px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
