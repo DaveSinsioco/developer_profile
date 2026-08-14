@@ -62,8 +62,9 @@
         
         <!-- TOP SECTION: Live Embed Area (Light Canvas) -->
         <div class="project-embed-top">
-          <div class="project-embed-viewport" id="embed-viewport" tabindex="0" title="Drag to pan, scroll to zoom, double-click to interact">
-            <span class="project-embed-hint" id="embed-hint">🖱 Drag to pan · Ctrl+Scroll to zoom · Double-click to interact</span>
+          <span class="project-embed-eyebrow">Data Management System</span>
+          <div class="project-embed-viewport" id="embed-viewport" tabindex="0" title="Hold Space + Drag to pan · Ctrl+Scroll to zoom">
+            <span class="project-embed-hint" id="embed-hint">Hold Space + Drag to pan · Ctrl+Scroll to zoom</span>
 
             <div class="project-embed-canvas" id="embed-canvas">
               <iframe
@@ -81,15 +82,12 @@
               <button type="button" class="project-embed-btn" id="embed-zoom-out" title="Zoom Out" aria-label="Zoom Out">−</button>
               <button type="button" class="project-embed-btn" id="embed-zoom-fit" title="Fit to Viewport" aria-label="Fit to Viewport">Fit</button>
               <button type="button" class="project-embed-btn" id="embed-zoom-in" title="Zoom In" aria-label="Zoom In">+</button>
-              <button type="button" class="project-embed-btn project-embed-btn--toggle" id="embed-toggle-interact" title="Toggle Live Interaction" aria-label="Toggle Live Interaction">Interact</button>
             </div>
           </div>
         </div>
 
         <!-- BOTTOM SECTION: Dark Info Panel -->
         <div class="project-embed-bottom">
-          <span class="project-embed-eyebrow">Data Management System</span>
-          <h3 class="project-embed-title">Data Management &amp; Analytics Platform</h3>
           <p class="project-embed-desc">
             A full-stack data management platform featuring real-time data visualizers, table filtering, 
             and system diagnostics. Built to explore responsive frontend architectures and seamless 
@@ -133,10 +131,25 @@
       const btnIn = document.getElementById('embed-zoom-in');
       const btnOut = document.getElementById('embed-zoom-out');
       const btnFit = document.getElementById('embed-zoom-fit');
-      const btnToggle = document.getElementById('embed-toggle-interact');
-      const hint = document.getElementById('embed-hint');
 
       if (!viewport || !canvas || typeof Panzoom === 'undefined') return;
+
+      function shouldHandleWheelEvent(event) {
+        return Boolean(event && (event.ctrlKey || event.metaKey));
+      }
+
+      function setIframePointerEvents(value) {
+        if (iframe) {
+          iframe.style.pointerEvents = value;
+        }
+      }
+
+      let panModifierActive = false;
+
+      function updatePanModifier(active) {
+        panModifierActive = active;
+        setIframePointerEvents(active ? 'none' : 'auto');
+      }
 
       // Calculate initial fit scale for a 1200px canvas inside the viewport
       function getFitScale() {
@@ -154,7 +167,10 @@
         startX: 0,
         startY: 0,
         contain: 'outside',
-        canvas: true
+        canvas: true,
+        beforeWheel: function (event) {
+          return shouldHandleWheelEvent(event);
+        }
       });
 
       function updateReadout(scale) {
@@ -164,15 +180,37 @@
       }
 
       updateReadout(initialScale);
+      setIframePointerEvents('auto');
 
-      // Scroll-to-zoom: ONLY intercept when Ctrl/Meta is pressed or when interacting,
-      // so normal page scrolling is never blocked!
-      viewport.addEventListener('wheel', function (e) {
-        if (viewport.classList.contains('is-interactive')) return;
-        if (e.ctrlKey || e.metaKey) {
-          e.preventDefault();
-          panzoom.zoomWithWheel(e);
+      viewport.addEventListener('mouseenter', function () {
+        if (!panModifierActive) {
+          setIframePointerEvents('auto');
         }
+      });
+
+      window.addEventListener('keydown', function (event) {
+        if (event.code === 'Space' || event.altKey) {
+          updatePanModifier(true);
+        }
+      });
+
+      window.addEventListener('keyup', function (event) {
+        if (event.code === 'Space' || event.altKey) {
+          updatePanModifier(false);
+        }
+      });
+
+      window.addEventListener('blur', function () {
+        updatePanModifier(false);
+      });
+
+      // Scroll-to-zoom: ONLY intercept when Ctrl/Meta is pressed,
+      // so normal page scrolling is never blocked.
+      viewport.addEventListener('wheel', function (e) {
+        if (!shouldHandleWheelEvent(e)) return;
+
+        e.preventDefault();
+        panzoom.zoomWithWheel(e);
       }, { passive: false });
 
       // Listen to panzoom change events to keep readout updated
@@ -198,31 +236,6 @@
         panzoom.zoom(fitScale, { animate: true });
         panzoom.pan(0, 0, { animate: true });
         updateReadout(fitScale);
-      });
-
-      // Double-click or button to toggle interactive mode
-      function toggleInteract(force) {
-        const isNowInteractive = typeof force === 'boolean' ? force : !viewport.classList.contains('is-interactive');
-        if (isNowInteractive) {
-          viewport.classList.add('is-interactive');
-          btnToggle.classList.add('is-active');
-          btnToggle.textContent = 'Exit';
-          hint.textContent = '✓ Live interaction active · Double-click to lock pan/zoom';
-        } else {
-          viewport.classList.remove('is-interactive');
-          btnToggle.classList.remove('is-active');
-          btnToggle.textContent = 'Interact';
-          hint.textContent = '🖱 Drag to pan · Ctrl+Scroll to zoom · Double-click to interact';
-        }
-      }
-
-      viewport.addEventListener('dblclick', function () {
-        toggleInteract();
-      });
-
-      btnToggle.addEventListener('click', function (e) {
-        e.stopPropagation();
-        toggleInteract();
       });
     })();
   </script>

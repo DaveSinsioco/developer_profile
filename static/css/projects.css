@@ -190,6 +190,17 @@
   border-bottom: 1px solid var(--border);
 }
 
+.project-embed-top .project-embed-eyebrow {
+  display: block;
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--garnet-bright);
+  font-weight: 500;
+}
+
 /* Viewport / Frame */
 .project-embed-viewport {
   position: relative;
@@ -209,30 +220,24 @@
   cursor: grabbing;
 }
 
-.project-embed-viewport.is-interactive {
-  cursor: default;
-  border-color: var(--garnet);
-  box-shadow: 0 0 0 2px rgba(178, 58, 74, 0.3);
-}
-
 .project-embed-canvas {
-  width: 1200px;
-  height: 800px;
+  width: 100%;
+  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
   transform-origin: 0 0;
   display: block;
 }
 
 .project-embed-iframe {
-  width: 1200px;
-  height: 800px;
+  width: 100%;
+  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
   border: none;
-  pointer-events: none;
+  pointer-events: auto;
   display: block;
   background: #ffffff;
-}
-
-.project-embed-viewport.is-interactive .project-embed-iframe {
-  pointer-events: auto;
 }
 
 /* Floating Hint */
@@ -254,12 +259,6 @@
   transition: opacity var(--transition), color var(--transition), border-color var(--transition);
   z-index: 5;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-}
-
-.project-embed-viewport.is-interactive .project-embed-hint {
-  color: var(--garnet-bright);
-  background: rgba(20, 23, 28, 0.92);
-  border-color: var(--garnet);
 }
 
 /* Floating Controls */
@@ -310,42 +309,20 @@
   border-color: var(--garnet);
 }
 
-.project-embed-btn--toggle.is-active {
-  background: var(--garnet);
-  color: var(--text);
-  border-color: var(--garnet-bright);
-}
-
 /* BOTTOM SECTION: Dark content panel */
 .project-embed-bottom {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
-  padding: var(--space-6) var(--space-8) var(--space-8);
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-6) var(--space-5);
   background: var(--surface);
-}
-
-.project-embed-eyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--garnet-bright);
-  font-weight: 500;
-}
-
-.project-embed-title {
-  font-family: var(--font-display);
-  font-size: 1.45rem;
-  font-weight: 700;
-  color: var(--text);
-  line-height: 1.25;
 }
 
 .project-embed-desc {
   color: var(--text-dim);
-  font-size: 0.93rem;
-  line-height: 1.7;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin: 0;
 }
 
 .project-embed-techline {
@@ -360,9 +337,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: var(--space-4);
+  padding-top: var(--space-3);
   border-top: 1px solid var(--border);
-  margin-top: var(--space-2);
+  margin-top: var(--space-1);
 }
 
 .project-embed-cta {
