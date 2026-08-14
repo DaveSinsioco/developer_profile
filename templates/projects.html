@@ -57,47 +57,168 @@
         </div>
       </article>
 
-      <!-- Card 2: SysSim -->
-      <article class="project-card" id="project-syssim" aria-label="SysSim project">
-        <div class="project-card-header">
-          <span class="project-category">Operating Systems · Lab Exercise</span>
-          <h3 class="project-title">SysSim</h3>
-          <span class="project-subtitle">CPU, Disk &amp; Memory Management Simulator</span>
+      <!-- Card 2: Interactive Live Preview Embed -->
+      <article class="project-card--embed" id="project-datamanagement" aria-label="Data Management project embed">
+        <div class="project-embed-meta">
+          <div class="project-embed-title-wrap">
+            <span class="project-category">Full Stack · Live Preview</span>
+            <h3 class="project-title">Data Management System</h3>
+          </div>
+          <div class="project-pills" aria-label="Tech stack">
+            <span class="pill">Next.js / Web</span>
+            <span class="pill">Interactive</span>
+          </div>
         </div>
 
-        <p class="project-desc">
-          Simulations covering CPU scheduling algorithms, disk scheduling strategies,
-          memory management techniques, and virtual memory paging — implemented as
-          hands-on explorations of OS theory translated into code.
-        </p>
+        <!-- Panzoom Interactive Viewport -->
+        <div class="project-embed-viewport" id="embed-viewport" tabindex="0" title="Drag to pan, scroll to zoom, double-click to interact">
+          <span class="project-embed-hint" id="embed-hint">🖱 Drag to pan · Scroll to zoom · Double-click to interact</span>
 
-        <div class="project-pills" aria-label="Tech stack">
-          <span class="pill">C++</span>
-          <span class="pill">CPU Scheduling</span>
-          <span class="pill">Memory Management</span>
-          <span class="pill">Virtual Memory</span>
+          <div class="project-embed-canvas" id="embed-canvas">
+            <iframe
+              src="https://vxetia2-data-management.vercel.app/"
+              class="project-embed-iframe"
+              id="embed-iframe"
+              title="Data Management Live Preview"
+              loading="lazy"
+            ></iframe>
+          </div>
+
+          <!-- Controls: Zoom Readout & Buttons -->
+          <div class="project-embed-controls" aria-label="Embed zoom controls">
+            <span class="project-embed-readout" id="embed-zoom-readout">1:2.8</span>
+            <button type="button" class="project-embed-btn" id="embed-zoom-out" title="Zoom Out" aria-label="Zoom Out">−</button>
+            <button type="button" class="project-embed-btn" id="embed-zoom-fit" title="Fit to Viewport" aria-label="Fit to Viewport">Fit</button>
+            <button type="button" class="project-embed-btn" id="embed-zoom-in" title="Zoom In" aria-label="Zoom In">+</button>
+            <button type="button" class="project-embed-btn project-embed-btn--toggle" id="embed-toggle-interact" title="Toggle Live Interaction" aria-label="Toggle Live Interaction">Interact</button>
+          </div>
         </div>
 
         <div class="project-card-footer">
           <a
-            href="https://github.com/ZyS1b/DSA_Group4_LabExercise6"
+            href="https://vxetia2-data-management.vercel.app/"
             target="_blank"
             rel="noopener noreferrer"
             class="project-link"
-            id="project-syssim-link"
-            aria-label="View SysSim on GitHub"
+            id="project-datamanagement-link"
+            aria-label="Open Data Management site in new tab"
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
             </svg>
-            View on GitHub →
+            View Live Site →
           </a>
-          <span class="project-flag" aria-label="Unverified repo link">
-            ⚠ possibly wrong repo — confirm link
+          <span class="pill" style="border-color: var(--garnet); color: var(--garnet-bright);">
+            ● Live Preview
           </span>
         </div>
       </article>
 
     </div><!-- /projects-grid -->
   </div>
+
+  <!-- Panzoom CDN & Handler Script -->
+  <script src="https://cdn.jsdelivr.net/npm/@panzoom/panzoom@4.5.1/dist/panzoom.min.js"></script>
+  <script>
+    (function () {
+      const viewport = document.getElementById('embed-viewport');
+      const canvas = document.getElementById('embed-canvas');
+      const iframe = document.getElementById('embed-iframe');
+      const readout = document.getElementById('embed-zoom-readout');
+      const btnIn = document.getElementById('embed-zoom-in');
+      const btnOut = document.getElementById('embed-zoom-out');
+      const btnFit = document.getElementById('embed-zoom-fit');
+      const btnToggle = document.getElementById('embed-toggle-interact');
+      const hint = document.getElementById('embed-hint');
+
+      if (!viewport || !canvas || typeof Panzoom === 'undefined') return;
+
+      // Calculate initial fit scale for a 1200px canvas inside the viewport
+      function getFitScale() {
+        const vw = viewport.clientWidth || 400;
+        return Math.max(0.28, Math.min(0.5, vw / 1200));
+      }
+
+      const initialScale = getFitScale();
+
+      const panzoom = Panzoom(canvas, {
+        maxScale: 3.0,
+        minScale: 0.25,
+        step: 0.15,
+        startScale: initialScale,
+        startX: 0,
+        startY: 0,
+        contain: 'outside',
+        canvas: true
+      });
+
+      function updateReadout(scale) {
+        if (!scale) scale = panzoom.getScale();
+        // format as ratio like 1:1.6 or (1/scale)
+        const ratio = (1 / scale).toFixed(1);
+        readout.textContent = `1:${ratio}`;
+      }
+
+      updateReadout(initialScale);
+
+      // Scroll-to-zoom on the viewport container
+      viewport.addEventListener('wheel', function (e) {
+        if (viewport.classList.contains('is-interactive')) return;
+        e.preventDefault();
+        panzoom.zoomWithWheel(e);
+      }, { passive: false });
+
+      // Listen to panzoom change events to keep readout updated
+      canvas.addEventListener('panzoomchange', function (e) {
+        updateReadout(e.detail.scale);
+      });
+
+      // Controls
+      btnIn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        panzoom.zoomIn();
+      });
+
+      btnOut.addEventListener('click', function (e) {
+        e.stopPropagation();
+        panzoom.zoomOut();
+      });
+
+      btnFit.addEventListener('click', function (e) {
+        e.stopPropagation();
+        const fitScale = getFitScale();
+        panzoom.reset({ animate: true });
+        panzoom.zoom(fitScale, { animate: true });
+        panzoom.pan(0, 0, { animate: true });
+        updateReadout(fitScale);
+      });
+
+      // Double-click or button to toggle interactive mode
+      function toggleInteract(force) {
+        const isNowInteractive = typeof force === 'boolean' ? force : !viewport.classList.contains('is-interactive');
+        if (isNowInteractive) {
+          viewport.classList.add('is-interactive');
+          btnToggle.classList.add('is-active');
+          btnToggle.textContent = 'Exit';
+          hint.textContent = '✓ Live interaction active · Double-click to lock pan/zoom';
+        } else {
+          viewport.classList.remove('is-interactive');
+          btnToggle.classList.remove('is-active');
+          btnToggle.textContent = 'Interact';
+          hint.textContent = '🖱 Drag to pan · Scroll to zoom · Double-click to interact';
+        }
+      }
+
+      viewport.addEventListener('dblclick', function () {
+        toggleInteract();
+      });
+
+      btnToggle.addEventListener('click', function (e) {
+        e.stopPropagation();
+        toggleInteract();
+      });
+    })();
+  </script>
 </section>
